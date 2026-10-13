@@ -67,15 +67,22 @@ then stuck with no dollars left on Arbitrum.
 
 ### 3. DeFi, fixed version: nothing
 
-**74.6 minutes, 0 gaps spotted, 0 blocked.** "Blocked" counts every
-profitable same-token gap *even if the account couldn't fund it*, so this
-means there was no moment when ETH-for-ETH or BTC-for-BTC across Binance,
-Base and Arbitrum would have paid even one cent after costs.
+Two runs, both with zero opportunities:
 
-*Caveat:* that run used the version before feed-health tracking was added,
-and the last frame showed a feed dropping out, so it can't prove the data
-stayed connected the whole time. It does match the exchange result, and the
-current version reports feed health so the next run can.
+| Run | Length | Price checks | Gaps spotted | Blocked |
+|---|---|---|---|---|
+| 13 Oct, afternoon | 74.6 min | not tracked yet | 0 | 0 |
+| 13 Oct, night | 62.1 min | **434 ok, 3 failed (99.3%)** | **0** | **0** |
+
+"Blocked" counts every profitable same-token gap *even if the account
+couldn't fund it*. So across 434 successful checks of Binance, Base and
+Arbitrum, there was not a single moment when ETH-for-ETH or BTC-for-BTC
+would have paid even one cent after fees and gas.
+
+One honest limit: over public RPC endpoints a full check took about
+8.6 seconds, so the scanner saw roughly one Base block in four. A gap that
+opened and closed between checks would be missed, but a bot that slow
+couldn't have traded it anyway; MEV searchers close those within the block.
 
 ### Why the viral claim doesn't hold up
 
